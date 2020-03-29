@@ -4,11 +4,106 @@
         <meta charset="utf-8">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="referrer" content="strict-origin" />
         <title>Link Todo App</title>
-        <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+        <base href="/">
         <link rel="stylesheet" href="css/style.css" />
+        <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
     </head>
     <body>
+        <div class="container my-3">
+            <div class="row justify-content-sm-center">
+                <div class="col-sm-9 col-lg-5">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <a href="/" class="btn-submit">
+                                    <div class="icon-container">
+                                        <i class="fas fa-plus fa-2x"></i>
+                                    </div>
+                                    <div class="icon-text">
+                                        Submit a Link
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <!--/.row-->
+                        <hr>
+                        <div class="row">
+                            <div class="col">
+                                <select name="order" id="order">
+                                    <option value="1">Most Voted (Z > A)</option>
+                                    <option value="2">Less Voted (A > Z)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!--/.row-->
+                        <div class="row">
+                            <div class="col">
+                                <div class="item-card">
+                                    <div class="item-card__points">
+                                        <label class="point">6</label>
+                                        <label>Points</label>
+                                    </div>
+                                    <div class="item-card__details">
+                                        <div>
+                                            <div class="item-card__details--title">
+                                                Submit a Link
+                                            </div>
+                                            <a href="/" target="_blank" class="item-card__details--link">
+                                                www.google.com
+                                            </a>
+                                        </div>
+                                        <div class="item-card__details--buttons">
+                                            <button class="item-card__details--link">
+                                                <i class="fas fa-arrow-up"></i> Up Vote
+                                            </button>
+                                            <button class="item-card__details--link">
+                                                <i class="fas fa-arrow-down"></i> Down Vote
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/.item-card-->
+                                <div class="item-card">
+                                    <div class="item-card__points">
+                                        <label class="point">6</label>
+                                        <label>Points</label>
+                                    </div>
+                                    <div class="item-card__details">
+                                        <div>
+                                            <div class="item-card__details--title">
+                                                Submit a Link
+                                            </div>
+                                            <a href="/" target="_blank" class="item-card__details--link">
+                                                www.google.com
+                                            </a>
+                                        </div>
+                                        <div class="item-card__details--buttons">
+                                            <button class="item-card__details--link">
+                                                <i class="fas fa-arrow-up"></i> Up Vote
+                                            </button>
+                                            <button class="item-card__details--link">
+                                                <i class="fas fa-arrow-down"></i> Down Vote
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/.item-card-->
+                            </div>
+                            <!--/.col-->
+                        </div>
+                        <!--/.row-->
+                    </div>
+                    <!--/.container-->
+                </div>
+                <!--/.col-->
+            </div>
+            <!--/.row-->
+        </div>
+        <!--/.container-->
         <script src="js/bundle.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
     </body>
 </html>

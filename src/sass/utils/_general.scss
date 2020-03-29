@@ -1,0 +1,17 @@
+*, ::after, ::before {
+  box-sizing: border-box;
+}
+
+body {
+  color: $font-color;
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+b, strong {
+  font-weight: bolder;
+}
+
+hr {
+  border: 1px solid #dddddd;
+  margin: 1rem 0;
+}

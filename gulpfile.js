@@ -19,7 +19,7 @@ sass.compiler = require("node-sass");
 
 // style paths
 var sass_src = "./src/sass/main.scss",
-    sass_files = "./src/sass/*.scss",
+    sass_files = "./src/sass/**/*.scss",
     img_src = "./src/assets/**/",
     html_src = "./src/**/*.html",
     js_src = "./src/**/*.js",

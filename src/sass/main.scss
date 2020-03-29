@@ -1,3 +1,11 @@
-body {
-  background-color: antiquewhite;
-}
+/* utils */
+@import 'utils/reset';
+@import 'utils/variables';
+@import 'utils/general';
+
+/* components */
+@import 'components/buttons';
+@import 'components/cards';
+
+/* node modules */
+@import 'node_modules/bootstrap/scss/bootstrap-grid';
