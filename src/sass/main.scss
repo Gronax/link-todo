@@ -6,6 +6,8 @@
 /* components */
 @import 'components/buttons';
 @import 'components/cards';
+@import 'components/style';
 
 /* node modules */
 @import 'node_modules/bootstrap/scss/bootstrap-grid';
+@import 'node_modules/toastr/toastr';

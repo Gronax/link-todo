@@ -18,7 +18,7 @@
                     <div class="container">
                         <div class="row">
                             <div class="col">
-                                <a href="/" class="btn-submit">
+                                <a href="add.html" class="btn-submit">
                                     <div class="icon-container">
                                         <i class="fas fa-plus fa-2x"></i>
                                     </div>
@@ -32,65 +32,16 @@
                         <hr>
                         <div class="row">
                             <div class="col">
-                                <select name="order" id="order">
-                                    <option value="1">Most Voted (Z > A)</option>
-                                    <option value="2">Less Voted (A > Z)</option>
+                                <select id="order">
+                                    <option value="desc">Most Voted (Z > A)</option>
+                                    <option value="asc">Less Voted (A > Z)</option>
                                 </select>
                             </div>
                         </div>
                         <!--/.row-->
                         <div class="row">
                             <div class="col">
-                                <div class="item-card">
-                                    <div class="item-card__points">
-                                        <label class="point">6</label>
-                                        <label>Points</label>
-                                    </div>
-                                    <div class="item-card__details">
-                                        <div>
-                                            <div class="item-card__details--title">
-                                                Submit a Link
-                                            </div>
-                                            <a href="/" target="_blank" class="item-card__details--link">
-                                                www.google.com
-                                            </a>
-                                        </div>
-                                        <div class="item-card__details--buttons">
-                                            <button class="item-card__details--link">
-                                                <i class="fas fa-arrow-up"></i> Up Vote
-                                            </button>
-                                            <button class="item-card__details--link">
-                                                <i class="fas fa-arrow-down"></i> Down Vote
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--/.item-card-->
-                                <div class="item-card">
-                                    <div class="item-card__points">
-                                        <label class="point">6</label>
-                                        <label>Points</label>
-                                    </div>
-                                    <div class="item-card__details">
-                                        <div>
-                                            <div class="item-card__details--title">
-                                                Submit a Link
-                                            </div>
-                                            <a href="/" target="_blank" class="item-card__details--link">
-                                                www.google.com
-                                            </a>
-                                        </div>
-                                        <div class="item-card__details--buttons">
-                                            <button class="item-card__details--link">
-                                                <i class="fas fa-arrow-up"></i> Up Vote
-                                            </button>
-                                            <button class="item-card__details--link">
-                                                <i class="fas fa-arrow-down"></i> Down Vote
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--/.item-card-->
+                                <div id="linkContainer"></div>
                             </div>
                             <!--/.col-->
                         </div>

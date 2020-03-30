@@ -22,7 +22,7 @@ var sass_src = "./src/sass/main.scss",
     sass_files = "./src/sass/**/*.scss",
     img_src = "./src/assets/**/",
     html_src = "./src/**/*.html",
-    js_src = "./src/**/*.js",
+    js_src = "./src/js/**/*.js",
     dist = "./dist",
     html_dest = "./dist/**/*.html",
     assets = "./dist/assets",
@@ -32,7 +32,12 @@ var sass_src = "./src/sass/main.scss",
     css_temp = "./dist/build/temp/css",
     jquery = "node_modules/jquery/dist/jquery.min.js",
     popperjs = "node_modules/popper.js/dist/umd/popper.min.js",
-    bootstrap = "node_modules/bootstrap/dist/js/bootstrap.min.js";
+    bootstrap = "node_modules/bootstrap/dist/js/bootstrap.min.js",
+    store2 = "node_modules/store2/dist/store2.js",
+    uuid = "node_modules/uuid/dist/index.js",
+    fastsort = "node_modules/fast-sort/dist/sort.js",
+    toastr = "node_modules/toastr/build/toastr.min.js",
+    moment = "node_modules/moment/moment.js";
 
 // hashing task
 gulp.task("hash", function() {
@@ -83,7 +88,7 @@ gulp.task("build-sass", () => {
 // bundle dependencies js
 gulp.task("vendor-js", done => {
   return gulp
-      .src([jquery, popperjs, bootstrap])
+      .src([jquery, popperjs, bootstrap, store2, fastsort, toastr, moment])
       .pipe(concat("vendor-bundle.js"))
       .pipe(gulp.dest(build));
   done();
@@ -179,7 +184,7 @@ gulp.task("delete-assets", () => {
 // watching scss/js/html files
 gulp.task("watch", function(done) {
   gulp.watch(sass_files, gulp.series("live-reload"));
-  gulp.watch("./src/*.js", gulp.series("live-reload"));
+  gulp.watch(js_src, gulp.series("live-reload"));
   gulp.watch(html_src).on(
       "change",
       gulp.series(
@@ -194,6 +199,7 @@ gulp.task("watch", function(done) {
           }
       )
   );
+  browserSync.reload();
   done();
 });
 

@@ -26,4 +26,19 @@
       }
     }
   }
+
+  &-add {
+    width: 100%;
+    padding: 8px;
+    font-size: 14px;
+    border-radius: $border-radius;
+    border: 1px solid #dddddd;
+    background-color: dodgerblue;
+    color: white;
+
+    &:hover,
+    &:active {
+      background-color: darken(dodgerblue, 10%);
+    }
+  }
 }

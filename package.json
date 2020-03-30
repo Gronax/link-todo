@@ -18,6 +18,7 @@
   "homepage": "https://github.com/Gronax/link-todo#readme",
   "devDependencies": {
     "@babel/core": "^7.9.0",
+    "@babel/plugin-transform-runtime": "^7.9.0",
     "@babel/preset-env": "^7.9.0",
     "autoprefixer": "^9.7.5",
     "browser-sync": "^2.26.7",
@@ -40,8 +41,14 @@
     "node-sass": "^4.13.1"
   },
   "dependencies": {
+    "@babel/runtime": "^7.9.2",
     "bootstrap": "^4.4.1",
+    "fast-sort": "^2.1.1",
     "jquery": "^3.4.1",
-    "popper.js": "^1.16.1"
+    "moment": "^2.24.0",
+    "popper.js": "^1.16.1",
+    "store2": "^2.11.0",
+    "toastr": "^2.1.4",
+    "uuid": "^7.0.2"
   }
 }
