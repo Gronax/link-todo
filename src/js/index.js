@@ -68,7 +68,7 @@ function updatePoints(id, isUpvote) {
 
 function getLinks(order = 'desc') {
   const myStore = store.get(FORM_NAME) || []
-  const pointsOrder = order === 'asc' ? { asc: u => u.points } : { desc: u => u.points }
+  //const pointsOrder = order === 'asc' ? { asc: u => u.points } : { desc: u => u.points }
   $('#linkContainer').html('');
 
   const renderLinks = myStore.map(item => {
@@ -79,22 +79,23 @@ function getLinks(order = 'desc') {
               <label>Points</label>
           </div>
           <div class="item-card__details">
-              <div>
-                  <div class="item-card__details--title">
-                      ${item.link_name}
-                  </div>
-                  <a href="${item.link_url}" target="_blank" class="item-card__details--link">
-                      ${item.link_url}
-                  </a>
-              </div>
-              <div class="item-card__details--buttons">
-                  <button class="item-card__details--link" onclick='updatePoints("${item.id}", true)'>
-                      <i class="fas fa-arrow-up"></i> Up Vote
-                  </button>
-                  <button class="item-card__details--link" onclick='updatePoints("${item.id}", false)'>
-                      <i class="fas fa-arrow-down"></i> Down Vote
-                  </button>
-              </div>
+            <div class="delete-icon" onclick='deleteLink("${item.id}")'><i class="fas fa-times-circle"></i></div>
+            <div>
+                <div class="item-card__details--title">
+                    ${item.link_name}
+                </div>
+                <a href="${item.link_url}" target="_blank" class="item-card__details--link">
+                    ${item.link_url}
+                </a>
+            </div>
+            <div class="item-card__details--buttons">
+                <button class="item-card__details--link" onclick='updatePoints("${item.id}", true)'>
+                    <i class="fas fa-arrow-up"></i> Up Vote
+                </button>
+                <button class="item-card__details--link" onclick='updatePoints("${item.id}", false)'>
+                    <i class="fas fa-arrow-down"></i> Down Vote
+                </button>
+            </div>
           </div>
       </div>
     `)
@@ -113,12 +114,24 @@ function deleteLink(id) {
 
   myStore.map(item => {
     if (item.id === id) {
-      toastr.success('Success', `${item.link_name} removed.`)
+      Swal.fire({
+        title: 'Are you sure?',
+        text: `Do you want to remove: ${item.link_name}?`,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then((result) => {
+        if (result.value) {
+          myStore = myStore.filter(obj => obj.id !== id)
+          store.set(FORM_NAME, myStore)
+          toastr.success('Success', `${item.link_name} removed.`)
+          getLinks()
+        }
+      })
     }
   })
-
-  myStore = myStore.filter(obj => obj.id !== id)
-  store.set(FORM_NAME, myStore)
 }
 
 $(document).ready(() => {

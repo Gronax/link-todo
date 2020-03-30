@@ -18,3 +18,12 @@
   border-radius: $border-radius;
   border: 1px solid #dddddd;
 }
+
+.delete-icon {
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+  color: #ce1d1d;
+}

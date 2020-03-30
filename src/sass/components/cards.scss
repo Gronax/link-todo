@@ -26,11 +26,16 @@
     }
 
     &__details {
+      position: relative;
       align-content: space-between;
       flex-wrap: wrap;
       display: flex;
       width: 100%;
       padding: 0 .8rem;
+
+      &:hover .delete-icon {
+        display: block;
+      }
 
       &--title {
         color: $font-color;
