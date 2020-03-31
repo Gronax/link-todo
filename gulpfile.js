@@ -39,6 +39,7 @@ var sass_src = "./src/sass/main.scss",
     toastr = "node_modules/toastr/build/toastr.min.js",
     lodash = "node_modules/lodash/lodash.js",
     sweetalert2 = "node_modules/sweetalert2/dist/sweetalert2.all.min.js",
+    paginationjs = "node_modules/paginationjs/dist/pagination.js",
     moment = "node_modules/moment/moment.js";
 
 // hashing task
@@ -90,7 +91,7 @@ gulp.task("build-sass", () => {
 // bundle dependencies js
 gulp.task("vendor-js", done => {
   return gulp
-      .src([jquery, popperjs, bootstrap, store2, fastsort, toastr, sweetalert2, moment])
+      .src([jquery, popperjs, bootstrap, store2, fastsort, toastr, sweetalert2, paginationjs, moment])
       .pipe(concat("vendor-bundle.js"))
       .pipe(gulp.dest(build));
   done();

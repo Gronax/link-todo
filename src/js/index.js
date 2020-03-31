@@ -6,7 +6,7 @@ toastr.options = {
   "newestOnTop": false,
   "progressBar": false,
   "positionClass": "toast-top-center",
-  "preventDuplicates": true,
+  "preventDuplicates": false,
   "onclick": null,
   "showDuration": "300",
   "hideDuration": "1000",
@@ -19,6 +19,7 @@ toastr.options = {
 }
 
 const FORM_NAME = 'link-store'
+let myStore = store.get(FORM_NAME) || []
 
 function CreateUUID() {
   return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
@@ -26,53 +27,22 @@ function CreateUUID() {
   )
 }
 
-function addLink(values) {
-  const myStore = store.get(FORM_NAME) || []
-
-  let data = {
-    id: CreateUUID(),
-    points: 0,
-    created_date: moment(),
-    ...values,
-  }
-
-  // if created UUID is not unique create new one
-  myStore.some((el) => (el.id === data.id)) ? data.id = CreateUUID() : data.id
-
-  // if link name is not unique don't add it
-  const isUniqueName = myStore.some((el) => (el.link_name === data.link_name))
-
-  if (!isUniqueName) {
-    myStore.push(data)
-    store.set(FORM_NAME, myStore)
-    toastr.success(`${data.link_name} added.`, 'Success')
+function sortArray(array, key, order) {
+  if (order == 'desc') {
+    return array.sort(function (a, b) {
+      var x = a[key]; var y = b[key];
+      return ((x > y) ? -1 : ((x < y) ? 1 : 0));
+    });
   } else {
-    toastr.error('Duplicated link name.', 'Error')
+    return array.sort(function (a, b) {
+      var x = a[key]; var y = b[key];
+      return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+    });
   }
 }
 
-function updatePoints(id, isUpvote) {
-  let myStore = store.get(FORM_NAME) || []
-
-  const newStore = myStore.map(item => {
-    let temp = Object.assign({}, item);
-    if (temp.id === id) {
-      isUpvote ? temp.points++ : temp.points > 0 && temp.points--
-    }
-    return temp
-  })
-
-  store.set(FORM_NAME, newStore)
-  getLinks()
-}
-
-function getLinks(order = 'desc') {
-  const myStore = store.get(FORM_NAME) || []
-  //const pointsOrder = order === 'asc' ? { asc: u => u.points } : { desc: u => u.points }
-  $('#linkContainer').html('');
-
-  const renderLinks = myStore.map(item => {
-    return (`
+function renderLinks(data) {
+  return data.map(item => (`
       <div class="item-card">
           <div class="item-card__points">
               <label class="point">${item.points}</label>
@@ -99,19 +69,62 @@ function getLinks(order = 'desc') {
           </div>
       </div>
     `)
+  )
+}
+
+function addLink(values) {
+  let data = {
+    id: CreateUUID(),
+    points: 0,
+    created_date: moment(),
+    ...values,
+  }
+
+  // if created UUID is not unique create new one
+  myStore.some((el) => (el.id === data.id)) ? data.id = CreateUUID() : data.id
+
+  // if link name is not unique don't add it
+  const isUniqueName = myStore.some((el) => (el.link_name === data.link_name))
+
+  if (!isUniqueName) {
+    myStore.push(data)
+    store.set(FORM_NAME, myStore)
+    toastr.success(`${data.link_name} added.`, 'Success')
+  } else {
+    toastr.error('Duplicated link name.', 'Error')
+  }
+}
+
+function updatePoints(id, isUpvote) {
+  const newStore = myStore.map(item => {
+    let temp = Object.assign({}, item);
+    if (temp.id === id) {
+      isUpvote ? temp.points++ : temp.points > 0 && temp.points--
+    }
+    return temp
   })
 
-  $('#linkContainer').html(renderLinks);
+  store.set(FORM_NAME, newStore)
+  getLinks()
+}
 
-  /*sort(myStore).by([
-    pointsOrder,
-    { desc: u => u.created_date }
-  ])*/
+function getLinks(order = 'desc') {
+  if ($('#pagination-container').length) {
+    sortArray(myStore, "points", order);
+
+    // initialize pagination
+    $('#pagination-container').pagination({
+      dataSource: myStore,
+      pageSize: 5,
+      callback: function(data, pagination) {
+        const html = renderLinks(data);
+        $('#data-container').html(html);
+      }
+    });
+  }
 }
 
 function deleteLink(id) {
-  let myStore = store.get(FORM_NAME) || []
-
   myStore.map(item => {
     if (item.id === id) {
       Swal.fire({
@@ -135,16 +148,24 @@ function deleteLink(id) {
 }
 
 $(document).ready(() => {
-  getLinks()
+  getLinks();
 
-  $('#linkForm').submit(function() {
-    const data = {
-      link_name: $('#linkName').val(),
-      link_url: $('#linkUrl').val()
-    }
-
-    addLink(data);
+  $('#linkForm').submit(function(e) {
     e.preventDefault();
+
+    const link_name = $('#linkName').val()
+    const link_url = $('#linkUrl').val()
+
+    if (!link_name.length || !link_url.length) {
+      toastr.error('Fill the missing inputs.', 'Error')
+    } else {
+      const data = {
+        link_name,
+        link_url
+      }
+
+      addLink(data);
+    }
   });
 
   $('#order').change(function() {
